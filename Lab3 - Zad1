@@ -1,0 +1,62 @@
+import sys
+class RGB:
+    def __init__(self, R_value, G_value, B_value):
+        self.setterR_value(R_value)
+        self.setterG_value(G_value)
+        self.setterB_value(B_value)
+        
+    def isCorrectValue(self, value):
+        if isinstance(value, int) == False:
+            print("Wartość nie jest liczbą całkowitą!")
+            exit()
+        if value < 0 or value > 255:
+            print("Przekroczono dopuszczalny zakres! <0;255>")
+            exit()
+            
+    def getterR_value(self):
+        return self.R_value
+    def getterG_value(self):
+        return self.G_value
+    def getterB_value(self):
+        return self.B_value
+    
+    
+    def setterR_value(self, newValue):
+        self.isCorrectValue(newValue)
+        self.R_value = newValue
+    def setterG_value(self, newValue):
+        self.isCorrectValue(newValue)
+        self.G_value = newValue
+    def setterB_value(self, newValue):
+        self.isCorrectValue(newValue)
+        self.B_value = newValue
+
+    def __str__(self):
+        return"["+str(self.getterR_value())+","+str(self.getterG_value())+","+str(self.getterB_value())+"]"
+
+class RGBController:
+    def initiateColor(self, color, R, G, B):
+        color.setterR_value(R)
+        color.setterG_value(G)
+        color.setterB_value(B)
+        
+    def showColor(self, color):
+        return color
+    
+    def mixTwoColors(self, color, color2):
+        mixR = int((color.getterR_value() + color2.getterR_value())/2)
+        mixG = int((color.getterG_value() + color2.getterG_value())/2)
+        mixB = int((color.getterB_value() + color2.getterB_value())/2)
+        return RGB(mixR, mixG, mixB)
+    
+
+color = RGB(100, 255, 50)
+color2 = RGB(125, 255, 100)
+color3 = RGB(0, 0, 0)
+print("Zmieszanie dwóch kolorów:", RGBController().mixTwoColors(color, RGB(100, 200, 100)))
+print("Wypisanie koloru:", RGBController().showColor(color2))
+color2.setterB_value(255)
+print("Zmiana wartości koloru B:", RGBController().showColor(color2))
+RGBController().initiateColor(color3, 100, 100, 100)
+print("Inicjalizacja koloru:", color3)
+
